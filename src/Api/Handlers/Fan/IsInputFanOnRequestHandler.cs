@@ -1,5 +1,4 @@
 ﻿using Api.Services;
-using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Handlers.Fan;

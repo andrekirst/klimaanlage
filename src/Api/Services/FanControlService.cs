@@ -21,4 +21,11 @@ public class FanControlService(IGpioControllerFacade gpioControllerFacade) : IFa
     {
         throw new NotImplementedException();
     }
+
+    public bool IsOutputFanOn() => gpioControllerFacade.IsHigh(PinConfiguration.Fan.Output.RelayGpioPin);
+
+    public void ChangeOutputFanRotationInPercent(Percent percent)
+    {
+        gpioControllerFacade.ChangePwmValues(PinConfiguration.Fan.Output.FanPwmPin, 400, 0.25);
+    }
 }

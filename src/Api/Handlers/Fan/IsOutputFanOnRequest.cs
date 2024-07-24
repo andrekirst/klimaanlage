@@ -2,6 +2,6 @@
 
 namespace Api.Handlers.Fan;
 
-public class TurnInputFanOnRequest : IRequest<IActionResult>
+public class IsOutputFanOnRequest : IRequest<IActionResult>
 {
 }

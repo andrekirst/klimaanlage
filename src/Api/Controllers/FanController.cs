@@ -1,6 +1,5 @@
 ﻿using System.Net;
 using Api.Handlers.Fan;
-using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -21,6 +20,21 @@ public class FanController(IMediator mediator) : ControllerBase
 
     [HttpGet("input/status/on")]
     [ProducesResponseType<bool>((int)HttpStatusCode.OK)]
-    public ValueTask<IActionResult> StatusOn(CancellationToken cancellationToken = default)
+    public ValueTask<IActionResult> InputFanStatusOn(CancellationToken cancellationToken = default)
         => mediator.Send(new IsInputFanOnRequest(), cancellationToken);
+
+    [HttpPost("output/off")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public ValueTask<IActionResult> TurnOutputFanOff(CancellationToken cancellationToken = default)
+        => mediator.Send(new TurnOutputFanOffRequest(), cancellationToken);
+
+    [HttpPost("output/on")]
+    [ProducesResponseType((int)HttpStatusCode.OK)]
+    public ValueTask<IActionResult> TurnOutputFanOn(CancellationToken cancellationToken = default)
+        => mediator.Send(new TurnOutputFanOnRequest(), cancellationToken);
+
+    [HttpGet("output/status/on")]
+    [ProducesResponseType<bool>((int)HttpStatusCode.OK)]
+    public ValueTask<IActionResult> OutputFanStatusOn(CancellationToken cancellationToken = default)
+        => mediator.Send(new IsOutputFanOnRequest(), cancellationToken);
 }

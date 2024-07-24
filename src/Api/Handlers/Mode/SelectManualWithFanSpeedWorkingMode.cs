@@ -1,6 +1,5 @@
 ﻿using Api.Domain;
 using Api.Domain.WorkingModes;
-using Mediator;
 
 namespace Api.Handlers.Mode;
 
