@@ -4,13 +4,13 @@ public static class ServiceRegistrations
 {
     public static void AddWorkingModes(this IServiceCollection services)
     {
-        services.AddScoped<IWorkingMode, OffWorkingMode>();
-        services.AddScoped<IWorkingMode, AutomaticWithTargetTemperatureAndMaxTimeWorkingMode>();
-        services.AddScoped<IWorkingMode, AutomaticWithTargetTemperatureAndFanSpeedWorkingMode>();
-        services.AddScoped<IWorkingMode, AutomaticWithTargetTemperatureWorkingMode>();
-        services.AddScoped<IWorkingMode, AutomaticWithMaxFanSpeedWorkingMode>();
-        services.AddScoped<IWorkingMode, ManualWithFanSpeedWorkingMode>();
+        services.AddSingleton<IWorkingMode, OffWorkingMode>();
+        services.AddSingleton<IWorkingMode, AutomaticWithTargetTemperatureAndMaxTimeWorkingMode>();
+        services.AddSingleton<IWorkingMode, AutomaticWithTargetTemperatureAndFanSpeedWorkingMode>();
+        services.AddSingleton<IWorkingMode, AutomaticWithTargetTemperatureWorkingMode>();
+        services.AddSingleton<IWorkingMode, AutomaticWithMaxFanSpeedWorkingMode>();
+        services.AddSingleton<IWorkingMode, ManualWithFanSpeedWorkingMode>();
 
-        services.AddScoped<CurrentWorkingModeSelector>();
+        services.AddSingleton<CurrentWorkingModeSelector>();
     }
 }

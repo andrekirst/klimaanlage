@@ -2,6 +2,7 @@ using System.Device.Gpio;
 using Api.Domain.WorkingModes;
 using Api.Facades;
 using Api.Helpers;
+using Api.HostedServices;
 using Api.Proxies;
 using Api.Services;
 
@@ -21,8 +22,8 @@ public class Program
         builder.Services.AddLogging();
         builder.Services.AddMemoryCache();
         
-        builder.Services.AddScoped<IFanControlService, FanControlService>();
-        builder.Services.AddScoped<IRelayControlService, RelayControlService>();
+        builder.Services.AddSingleton<IFanControlService, FanControlService>();
+        builder.Services.AddSingleton<IRelayControlService, RelayControlService>();
         builder.Services.AddSingleton<IGpioControllerFacade, GpioControllerFacade>();
 
 
@@ -37,8 +38,9 @@ public class Program
             builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxyUsingFakeGpioController>();
         }
 
-        builder.Services.AddScoped<IInitializationService, InitializationService>();
+        builder.Services.AddSingleton<IInitializationService, InitializationService>();
         builder.Services.AddWorkingModes();
+        builder.Services.AddHostedService<RunWorkingModeHostedService>();
 
         var app = builder.Build();
 
