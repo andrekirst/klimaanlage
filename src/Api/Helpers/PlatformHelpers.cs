@@ -29,6 +29,6 @@ public static class PlatformHelpers
 
         var cpuinoFileLines = File.ReadLines(procCpuinfoFile);
 
-        return cpuinoFileLines.Any(cpuinoFileLine => cpuinoFileLine.StartsWith("Hardware") && cpuinoFileLine.Contains("BCM"));
+        return cpuinoFileLines.Any(cpuinoFileLine => cpuinoFileLine.Contains("Raspberry"));
     }
 }
