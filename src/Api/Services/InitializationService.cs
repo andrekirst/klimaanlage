@@ -7,8 +7,11 @@ public class InitializationService(IGpioControllerFacade gpioControllerFacade) :
     public void Initialize()
     {
         gpioControllerFacade.OpenOutputPin(PinConfiguration.Fan.Input.RelayGpioPin);
-        gpioControllerFacade.OpenOutputPin(PinConfiguration.Fan.Output.RelayGpioPin);
         gpioControllerFacade.OpenOutputPin(PinConfiguration.Fan.Input.FanPwmPin);
         gpioControllerFacade.SetupFanPwm(PinConfiguration.Fan.Input.FanPwmPin);
+
+        gpioControllerFacade.OpenOutputPin(PinConfiguration.Fan.Output.RelayGpioPin);
+        gpioControllerFacade.OpenOutputPin(PinConfiguration.Fan.Output.FanPwmPin);
+        gpioControllerFacade.SetupFanPwm(PinConfiguration.Fan.Output.FanPwmPin);
     }
 }
