@@ -1,0 +1,6 @@
+@Api.RemoteGpio_HostAddress = http://localhost:5068
+
+GET {{Api.RemoteGpio_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
