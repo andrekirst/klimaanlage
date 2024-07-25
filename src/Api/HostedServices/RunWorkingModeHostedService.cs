@@ -41,13 +41,13 @@ public class RunWorkingModeHostedService : BackgroundService
     private async Task DetermineWorkingMode(CancellationToken cancellationToken)
     {
         var workingMode = await _currentWorkingModeSelector.Get();
-        _logger.LogInformation("Determine new working mode: {workingMode}", workingMode.Identifier);
 
         if (workingMode != _currentWorkingMode)
         {
-            _logger.LogInformation("start new {currentWorkMode}:{setup}", workingMode.Identifier, nameof(IWorkingMode.Setup));
+            _logger.LogInformation("Identified new working mode: {workingMode}", workingMode.Identifier);
+            _logger.LogInformation("start {currentWorkMode}:{setup}", workingMode.Identifier, nameof(IWorkingMode.Setup));
             await workingMode.Setup(cancellationToken);
-            _logger.LogInformation("finished new {currentWorkMode}:{setup}", workingMode.Identifier, nameof(IWorkingMode.Setup));
+            _logger.LogInformation("finished {currentWorkMode}:{setup}", workingMode.Identifier, nameof(IWorkingMode.Setup));
             _currentWorkingMode = workingMode;
         }
     }
