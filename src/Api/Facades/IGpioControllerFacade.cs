@@ -14,6 +14,9 @@ public interface IGpioControllerFacade
     void SetupFanPwm(int fanPwmPin);
     void ChangePwmValues(int pinNumber, int? frequency = null, double? dutyCycle = null);
     void StopPwm(int pinNumber);
+    PinMode GetPinMode(int pinNumber);
+    void SetPinModeOutput(int pinNumber);
+    void SetPinModeInput(int pinNumber);
 }
 
 public class GpioControllerFacade(IGpioControllerProxy gpioControllerProxy) : IGpioControllerFacade
@@ -27,4 +30,7 @@ public class GpioControllerFacade(IGpioControllerProxy gpioControllerProxy) : IG
     public void SetupFanPwm(int pinNumber) => gpioControllerProxy.SetupPwm(pinNumber);
     public void ChangePwmValues(int pinNumber, int? frequency = null, double? dutyCycle = null) => gpioControllerProxy.ChangePwmValues(pinNumber, frequency, dutyCycle);
     public void StopPwm(int pinNumber) => gpioControllerProxy.StopPwm(pinNumber);
+    public PinMode GetPinMode(int pinNumber) => gpioControllerProxy.GetPinMode(pinNumber);
+    public void SetPinModeOutput(int pinNumber) => gpioControllerProxy.SetPinMode(pinNumber, PinMode.Output);
+    public void SetPinModeInput(int pinNumber) => gpioControllerProxy.SetPinMode(pinNumber, PinMode.Input);
 }

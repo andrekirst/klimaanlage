@@ -23,6 +23,7 @@ public class FanControlService(IGpioControllerFacade gpioControllerFacade) : IFa
     }
 
     public bool IsOutputFanOn() => gpioControllerFacade.IsHigh(PinConfiguration.Fan.Output.RelayGpioPin);
+    public bool IsOutputFanOff() => gpioControllerFacade.IsLow(PinConfiguration.Fan.Output.RelayGpioPin);
 
     public void ChangeOutputFanRotationInPercent(Percent percent)
     {

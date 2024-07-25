@@ -8,5 +8,6 @@ public interface IFanControlService
     void ChangeInputFanRotationInPercent(Percent percent);
     Percent GetInputFanRotationInPercent();
     bool IsOutputFanOn();
+    bool IsOutputFanOff();
     void ChangeOutputFanRotationInPercent(Percent percent);
 }

@@ -10,6 +10,7 @@ public class OffWorkingMode(ILogger logger) : IWorkingMode
         return Task.CompletedTask;
     }
 
-    public string Identifier => "Off";
+    public const string IdentifierKey = nameof(OffWorkingMode);
+    public string Identifier => IdentifierKey;
     public string DisplayName => "Off";
 }

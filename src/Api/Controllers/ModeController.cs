@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Api.Handlers.Mode;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
@@ -7,10 +7,17 @@ namespace Api.Controllers;
 [ApiController]
 public class ModeController(IMediator mediator) : ControllerBase
 {
-    [HttpPost("select/manual/fanspeed")]
-    public async Task<IActionResult> SelectManualWithFanSpeedWorkingMode(double percent, CancellationToken cancellationToken = default)
+    [HttpPost("select/manual/fan-full-power")]
+    public async Task<IActionResult> SelectManualWithFullPowerWorkingMode(CancellationToken cancellationToken = default)
     {
+        var successful = await mediator.Send(new SelectManualWithFullPowerWorkingModeRequest(), cancellationToken);
+        return successful ? Ok() : NoContent();
+    }
 
-        return Ok();
+    [HttpPost("off")]
+    public async Task<IActionResult> SelectOffWorkingMode(CancellationToken cancellationToken = default)
+    {
+        var successful = await mediator.Send(new SelectOffWorkingModeRequest(), cancellationToken);
+        return successful ? Ok() : NoContent();
     }
 }
