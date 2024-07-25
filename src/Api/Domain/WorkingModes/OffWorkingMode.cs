@@ -1,6 +1,6 @@
 ﻿namespace Api.Domain.WorkingModes;
 
-public class OffWorkingMode(ILogger logger) : IWorkingMode
+public class OffWorkingMode(ILogger<OffWorkingMode> logger) : IWorkingMode
 {
     public Task<bool> Setup(CancellationToken cancellationToken = default) => Task.FromResult(true);
 

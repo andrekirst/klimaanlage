@@ -10,12 +10,12 @@ public class SelectOffWorkingModeRequestHandler(
 {
     public async ValueTask<bool> Handle(SelectOffWorkingModeRequest request, CancellationToken cancellationToken)
     {
-        var selectedworkingMode = workingModes.Single(w => w.Identifier == OffWorkingMode.IdentifierKey);
+        var selectedWorkingMode = workingModes.Single(w => w.Identifier == OffWorkingMode.IdentifierKey);
 
-        var successful = await selectedworkingMode.Setup(cancellationToken);
+        var successful = await selectedWorkingMode.Setup(cancellationToken);
         if (!successful) return false;
 
-        await currentWorkingModeSelector.Set(selectedworkingMode.Identifier);
+        await currentWorkingModeSelector.Set(selectedWorkingMode.Identifier);
         return true;
     }
 }

@@ -24,9 +24,9 @@ public class RunWorkingModeHostedService : BackgroundService
         _logger.LogInformation("Current word mode: {currentWorkMode}", _currentWorkingMode.DisplayName);
 
         _logger.LogInformation("start {currentWorkMode}:{setup}", _currentWorkingMode.Identifier, nameof(IWorkingMode.Setup));
-        
+
         await _currentWorkingMode.Setup(cancellationToken);
-        
+
         _logger.LogInformation("finished {currentWorkMode}:{setup}", _currentWorkingMode.Identifier, nameof(IWorkingMode.Setup));
 
         var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));

@@ -14,7 +14,7 @@ public class CurrentWorkingModeSelector(
 
         var workingMode = value != null
             ? workingModes.Single(mode => mode.Identifier == value)
-            : workingModes.Single(mode => mode.Identifier == "Off");
+            : workingModes.Single(mode => mode.Identifier == OffWorkingMode.IdentifierKey);
 
         return Task.FromResult(workingMode);
     }

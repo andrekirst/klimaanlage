@@ -10,6 +10,7 @@ public static class ServiceRegistrations
         services.AddSingleton<IWorkingMode, AutomaticWithTargetTemperatureWorkingMode>();
         services.AddSingleton<IWorkingMode, AutomaticWithMaxFanSpeedWorkingMode>();
         services.AddSingleton<IWorkingMode, ManualWithFanSpeedWorkingMode>();
+        services.AddSingleton<IWorkingMode, ManualWithFullPowerWorkingMode>();
 
         services.AddSingleton<CurrentWorkingModeSelector>();
     }
