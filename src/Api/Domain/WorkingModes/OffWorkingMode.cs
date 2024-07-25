@@ -1,12 +1,16 @@
-﻿namespace Api.Domain.WorkingModes;
+﻿using Api.Services;
 
-public class OffWorkingMode(ILogger<OffWorkingMode> logger) : IWorkingMode
+namespace Api.Domain.WorkingModes;
+
+public class OffWorkingMode(
+    IRelayControlService relayControlService,
+    ILogger<OffWorkingMode> logger) : IWorkingMode
 {
     public Task<bool> Setup(CancellationToken cancellationToken = default) => Task.FromResult(true);
 
     public Task Do(CancellationToken cancellationToken = default)
     {
-        logger.LogInformation("Off working mode executed");
+        relayControlService.TurnOutputRelayOff();
         return Task.CompletedTask;
     }
 
