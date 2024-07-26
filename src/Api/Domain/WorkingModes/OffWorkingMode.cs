@@ -6,13 +6,13 @@ public class OffWorkingMode(
     IRelayControlService relayControlService,
     ILogger<OffWorkingMode> logger) : IWorkingMode
 {
-    public Task<bool> Setup(CancellationToken cancellationToken = default) => Task.FromResult(true);
-
-    public Task Do(CancellationToken cancellationToken = default)
+    public Task<bool> Setup(CancellationToken cancellationToken = default)
     {
         relayControlService.TurnOutputRelayOff();
-        return Task.CompletedTask;
+        return Task.FromResult(true);
     }
+
+    public Task Do(CancellationToken cancellationToken = default) => Task.CompletedTask;
 
     public const string IdentifierKey = nameof(OffWorkingMode);
     public string Identifier => IdentifierKey;

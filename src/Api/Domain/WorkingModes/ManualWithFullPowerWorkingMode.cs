@@ -8,7 +8,10 @@ public class ManualWithFullPowerWorkingMode(
 {
     public Task<bool> Setup(CancellationToken cancellationToken = default)
     {
-        relayControlService.TurnOutputRelayOn();
+        if (fanControlService.IsOutputFanOff())
+        {
+            relayControlService.TurnOutputRelayOn();
+        }
         return Task.FromResult(fanControlService.IsOutputFanOn());
     }
 
