@@ -1,8 +1,8 @@
 ﻿using Api.Domain;
 
-namespace Api.Sensors;
+namespace Api.Services;
 
-public interface IDs18B20
+public interface ITemperatureSensor
 {
     Task<Temperature?> Read(int pinNumber, CancellationToken cancellationToken = default);
 }
