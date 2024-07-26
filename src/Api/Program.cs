@@ -40,7 +40,7 @@ public class Program
 
         builder.Services.AddSingleton<IInitializationService, InitializationService>();
         builder.Services.AddWorkingModes();
-        builder.Services.AddHostedService<RunWorkingModeHostedService>();
+        //builder.Services.AddHostedService<RunWorkingModeHostedService>();
 
         var app = builder.Build();
 
