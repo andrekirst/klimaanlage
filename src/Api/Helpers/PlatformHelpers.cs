@@ -19,7 +19,7 @@ public static class PlatformHelpers
             return;
         }
 
-        throw new Exception("Process must be started with evaluated rights to access");
+        throw new Exception("Process must be started with evaluated rights to access gpio");
     }
 
     public static bool IsRunningOnRaspberryPi()
