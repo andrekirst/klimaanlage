@@ -2,9 +2,7 @@
 
 namespace Api.Domain.WorkingModes;
 
-public class OffWorkingMode(
-    IRelayControlService relayControlService,
-    ILogger<OffWorkingMode> logger) : IWorkingMode
+public class OffWorkingMode(IRelayControlService relayControlService) : IWorkingMode
 {
     public Task<bool> Setup(CancellationToken cancellationToken = default)
     {
@@ -12,7 +10,10 @@ public class OffWorkingMode(
         return Task.FromResult(true);
     }
 
-    public Task Do(CancellationToken cancellationToken = default) => Task.CompletedTask;
+    public Task Do(CancellationToken cancellationToken = default)
+    {
+        return Task.CompletedTask;
+    }
 
     public const string IdentifierKey = nameof(OffWorkingMode);
     public string Identifier => IdentifierKey;

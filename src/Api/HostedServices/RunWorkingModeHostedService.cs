@@ -30,12 +30,15 @@ public class RunWorkingModeHostedService : BackgroundService
         _logger.LogInformation("finished {currentWorkMode}:{setup}", _currentWorkingMode.Identifier, nameof(IWorkingMode.Setup));
 
         var periodicTimer = new PeriodicTimer(TimeSpan.FromSeconds(10));
-        do
+        while(!cancellationToken.IsCancellationRequested &&
+              await periodicTimer.WaitForNextTickAsync(cancellationToken))
         {
+            _logger.LogInformation("Start work execution");
             await DetermineWorkingMode(cancellationToken);
 
             await _currentWorkingMode.Do(cancellationToken);
-        } while (await periodicTimer.WaitForNextTickAsync(cancellationToken));
+            _logger.LogInformation("Finished work execution");
+        }
     }
 
     private async Task DetermineWorkingMode(CancellationToken cancellationToken)
