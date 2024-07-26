@@ -12,6 +12,8 @@ public class Program
 {
     public static void Main(string[] args)
     {
+        PlatformHelpers.EnsureProcessIsElevated();
+
         var builder = WebApplication.CreateBuilder(args);
         builder.WebHost.UseUrls("http://*:5300", "https://*:5301");
 
