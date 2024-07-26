@@ -30,9 +30,8 @@ public class Program
         if (PlatformHelpers.IsRunningOnRaspberryPi())
         {
             Console.WriteLine("Register Raspberry PI dependencies");
-            builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxyUsingFakeGpioController>();
-            //builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxy>();
-            //builder.Services.AddSingleton(_ => new GpioController()); 
+            builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxy>();
+            builder.Services.AddSingleton(_ => new GpioController());
         }
         else
         {
@@ -41,7 +40,7 @@ public class Program
 
         builder.Services.AddSingleton<IInitializationService, InitializationService>();
         builder.Services.AddWorkingModes();
-        //builder.Services.AddHostedService<RunWorkingModeHostedService>();
+        builder.Services.AddHostedService<RunWorkingModeHostedService>();
 
         var app = builder.Build();
 
