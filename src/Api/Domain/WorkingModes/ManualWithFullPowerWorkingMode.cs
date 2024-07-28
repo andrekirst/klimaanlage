@@ -6,19 +6,21 @@ public class ManualWithFullPowerWorkingMode(
     IRelayControlService relayControlService,
     IFanControlService fanControlService) : IWorkingMode
 {
-    public Task<bool> Setup(CancellationToken cancellationToken = default)
+    public async Task<bool> Setup(CancellationToken cancellationToken = default)
     {
         if (fanControlService.IsOutputFanOff())
         {
             relayControlService.TurnOutputRelayOn();
         }
 
+        await Task.Delay(50, cancellationToken);
+
         if (fanControlService.IsInputFanOn())
         {
             relayControlService.TurnInputRelayOn();
         }
 
-        return Task.FromResult(fanControlService.IsOutputFanOn() && fanControlService.IsInputFanOn());
+        return fanControlService.IsOutputFanOn() && fanControlService.IsInputFanOn();
     }
 
     public Task Do(CancellationToken cancellationToken = default)
