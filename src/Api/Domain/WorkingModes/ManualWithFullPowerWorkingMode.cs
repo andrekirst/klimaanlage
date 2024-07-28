@@ -13,9 +13,7 @@ public class ManualWithFullPowerWorkingMode(
             relayControlService.TurnOutputRelayOn();
         }
 
-        Thread.Sleep(100);
-
-        if (fanControlService.IsInputFanOn())
+        if (fanControlService.IsInputFanOff())
         {
             relayControlService.TurnInputRelayOn();
         }

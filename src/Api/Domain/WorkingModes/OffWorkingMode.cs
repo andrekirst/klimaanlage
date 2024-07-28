@@ -4,14 +4,12 @@ namespace Api.Domain.WorkingModes;
 
 public class OffWorkingMode(IRelayControlService relayControlService) : IWorkingMode
 {
-    public async Task<bool> Setup(CancellationToken cancellationToken = default)
+    public Task<bool> Setup(CancellationToken cancellationToken = default)
     {
         relayControlService.TurnOutputRelayOff();
 
-        await Task.Delay(50, cancellationToken);
-
         relayControlService.TurnInputRelayOff();
-        return true;
+        return Task.FromResult(true);
     }
 
     public Task Do(CancellationToken cancellationToken = default) => Task.CompletedTask;
