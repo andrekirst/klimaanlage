@@ -3,7 +3,7 @@ using Api.Domain;
 using Api.Extensions;
 using Api.Facades;
 
-namespace Api.Sensors;
+namespace Api.Hardware.Sensors;
 
 public class Ds18B20(IGpioControllerFacade gpioControllerFacade) : Sensor, IDs18B20
 {
@@ -18,7 +18,7 @@ public class Ds18B20(IGpioControllerFacade gpioControllerFacade) : Sensor, IDs18
         await WaitAsync(0.07.Seconds(), cancellationToken);
 
         if (!gpioControllerFacade.IsLow(pinNumber)) return null;
-        
+
         await WaitAsync(0.41.Seconds(), cancellationToken);
         await WriteByteAsync(pinNumber, 0xCC, cancellationToken);
         await WriteByteAsync(pinNumber, 0xBE, cancellationToken);
@@ -29,7 +29,7 @@ public class Ds18B20(IGpioControllerFacade gpioControllerFacade) : Sensor, IDs18
             data[i] = await ReadByteAsync(pinNumber, cancellationToken);
         }
 
-        var temperature = data[0] | (data[1] << 8);
+        var temperature = data[0] | data[1] << 8;
         return new Temperature(temperature / 0.16);
     }
 
@@ -63,7 +63,7 @@ public class Ds18B20(IGpioControllerFacade gpioControllerFacade) : Sensor, IDs18
             gpioControllerFacade.WriteLow(pinNumber);
             await WaitAsync(0.001.Seconds(), cancellationToken);
 
-            if ((data & (1 << i)) != 0)
+            if ((data & 1 << i) != 0)
             {
                 gpioControllerFacade.WriteHigh(pinNumber);
             }

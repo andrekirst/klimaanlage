@@ -4,5 +4,5 @@ namespace Api.Services;
 
 public interface ITemperatureSensor
 {
-    Task<Temperature?> Read(int pinNumber, CancellationToken cancellationToken = default);
+    Task<Temperature?> ReadAsync(int pinNumber, CancellationToken cancellationToken = default);
 }

@@ -4,14 +4,13 @@ namespace Api.Services;
 
 public class TemperatureReader(
     ITemperatureStorage temperatureStorage,
-    ITemperatureSensor temperatureSensor
-    ) : ITemperatureReader
+    ITemperatureSensor temperatureSensor) : ITemperatureReader
 {
     public async Task<Temperature?> GetOutsideTemperature(bool forceUseSensor = false, CancellationToken cancellationToken = default)
     {
         if (forceUseSensor)
         {
-            var temperature = await temperatureSensor.Read(PinConfiguration.Temperature.Output.GpioPin, cancellationToken);
+            var temperature = await ReadTemperatureSensor(temperatureSensor, cancellationToken);
             if (temperature != null)
             {
                 await temperatureStorage.SetOutsideTemperature(temperature, cancellationToken);
@@ -25,10 +24,15 @@ public class TemperatureReader(
             return storedTemperature;
         }
 
-        var newTemperature = await temperatureSensor.Read(PinConfiguration.Temperature.Output.GpioPin, cancellationToken);
+        var newTemperature = await ReadTemperatureSensor(temperatureSensor, cancellationToken);
         if (newTemperature == null) return null;
         
         await temperatureStorage.SetOutsideTemperature(newTemperature, cancellationToken);
         return newTemperature;
+    }
+
+    private static async Task<Temperature?> ReadTemperatureSensor(ITemperatureSensor temperatureSensor, CancellationToken cancellationToken)
+    {
+        return await temperatureSensor.ReadAsync(PinConfiguration.Temperature.Output.GpioPin, cancellationToken);
     }
 }

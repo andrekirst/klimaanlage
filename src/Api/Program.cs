@@ -1,6 +1,8 @@
 using System.Device.Gpio;
+using System.Device.I2c;
 using Api.Domain.WorkingModes;
 using Api.Facades;
+using Api.Hardware.Displays;
 using Api.Helpers;
 using Api.HostedServices;
 using Api.Proxies;
@@ -34,6 +36,12 @@ public class Program
             Console.WriteLine("Register Raspberry PI dependencies");
             builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxy>();
             builder.Services.AddSingleton(_ => new GpioController());
+            builder.Services.AddKeyedSingleton(nameof(Ssd1306Size128X64), (_, _) => I2cDevice.Create(new I2cConnectionSettings(1, 0x3C)));
+            builder.Services.AddSingleton(provider =>
+            {
+                var i2CDevice = provider.GetRequiredKeyedService<I2cDevice>(nameof(Ssd1306Size128X64));
+                return new Ssd1306Size128X64(i2CDevice);
+            });
         }
         else
         {

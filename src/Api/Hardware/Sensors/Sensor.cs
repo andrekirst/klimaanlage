@@ -1,4 +1,4 @@
-﻿namespace Api.Sensors;
+﻿namespace Api.Hardware.Sensors;
 
 public abstract class Sensor
 {

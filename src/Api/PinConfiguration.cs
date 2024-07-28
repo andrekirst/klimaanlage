@@ -24,7 +24,7 @@ public static class PinConfiguration
             public static int GpioPin = 4;
         }
 
-        public static class Input
+        public static class Inside
         {
             public static int GpioPin = 5;
         }

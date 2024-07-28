@@ -12,7 +12,13 @@ public class ManualWithFullPowerWorkingMode(
         {
             relayControlService.TurnOutputRelayOn();
         }
-        return Task.FromResult(fanControlService.IsOutputFanOn());
+
+        if (fanControlService.IsInputFanOn())
+        {
+            relayControlService.TurnInputRelayOn();
+        }
+
+        return Task.FromResult(fanControlService.IsOutputFanOn() && fanControlService.IsInputFanOn());
     }
 
     public Task Do(CancellationToken cancellationToken = default)
@@ -20,6 +26,11 @@ public class ManualWithFullPowerWorkingMode(
         if (fanControlService.IsOutputFanOff())
         {
             relayControlService.TurnOutputRelayOn();
+        }
+
+        if (fanControlService.IsInputFanOff())
+        {
+            relayControlService.TurnInputRelayOn();
         }
 
         return Task.CompletedTask;

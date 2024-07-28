@@ -1,6 +1,6 @@
 ﻿using Api.Domain;
 
-namespace Api.Sensors;
+namespace Api.Hardware.Sensors;
 
 public interface IDs18B20
 {

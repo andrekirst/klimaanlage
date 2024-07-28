@@ -5,6 +5,7 @@ namespace Api.Services;
 public interface IFanControlService
 {
     bool IsInputFanOn();
+    bool IsInputFanOff();
     void ChangeInputFanRotationInPercent(Percent percent);
     Percent GetInputFanRotationInPercent();
     bool IsOutputFanOn();

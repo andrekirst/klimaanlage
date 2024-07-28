@@ -5,12 +5,8 @@ namespace Api.Services;
 
 public class FanControlService(IGpioControllerFacade gpioControllerFacade) : IFanControlService
 {
-    public bool IsInputFanOn()
-    {
-        var value = gpioControllerFacade.IsHigh(PinConfiguration.Fan.Input.RelayGpioPin);
-
-        return value;
-    }
+    public bool IsInputFanOn() => gpioControllerFacade.IsHigh(PinConfiguration.Fan.Input.RelayGpioPin);
+    public bool IsInputFanOff() => gpioControllerFacade.IsLow(PinConfiguration.Fan.Input.RelayGpioPin);
 
     public void ChangeInputFanRotationInPercent(Percent percent)
     {
