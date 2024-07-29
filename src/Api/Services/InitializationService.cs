@@ -14,10 +14,8 @@ public class InitializationService(
 {
     public void Initialize()
     {
-        
-        
         display.EnableDisplay(true);
-        const string font = "DejaVu Sans";
+        const string font = "Liberation Sans";
         using (var image = BitmapImage.CreateBitmap(128, 64, PixelFormat.Format32bppArgb))
         {
             image.Clear(Color.Black);
