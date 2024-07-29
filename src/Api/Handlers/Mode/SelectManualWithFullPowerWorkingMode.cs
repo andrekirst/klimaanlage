@@ -7,8 +7,7 @@ public class SelectManualWithFullPowerWorkingModeRequest : IRequest<bool>;
 
 public class SelectManualWithFullPowerWorkingModeRequestHandler(
     CurrentWorkingModeSelector currentWorkingModeSelector,
-    IEnumerable<IWorkingMode> workingModes,
-    Ssd1306Size128X64 display) : IRequestHandler<SelectManualWithFullPowerWorkingModeRequest, bool>
+    IEnumerable<IWorkingMode> workingModes) : IRequestHandler<SelectManualWithFullPowerWorkingModeRequest, bool>
 {
     public async ValueTask<bool> Handle(SelectManualWithFullPowerWorkingModeRequest request, CancellationToken cancellationToken)
     {
