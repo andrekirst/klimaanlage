@@ -36,17 +36,14 @@ public class Program
         if (PlatformHelpers.IsRunningOnRaspberryPi())
         {
             Console.WriteLine("Register Raspberry PI dependencies");
-            SkiaSharpAdapter.Register();
-            Thread.Sleep(100);
-            BitmapImage.RegisterImageFactory(new SkiaSharpImageFactory());
             builder.Services.AddSingleton<IGpioControllerProxy, GpioControllerProxy>();
             builder.Services.AddSingleton(_ => new GpioController());
-            builder.Services.AddKeyedSingleton(nameof(Ssd1306Size128X64), (_, _) => I2cDevice.Create(new I2cConnectionSettings(1, 0x3C)));
-            builder.Services.AddSingleton(provider =>
-            {
-                var i2CDevice = provider.GetRequiredKeyedService<I2cDevice>(nameof(Ssd1306Size128X64));
-                return new Ssd1306Size128X64(i2CDevice);
-            });
+            //builder.Services.AddKeyedSingleton(nameof(Ssd1306Size128X64), (_, _) => I2cDevice.Create(new I2cConnectionSettings(1, 0x3C)));
+            //builder.Services.AddSingleton(provider =>
+            //{
+            //    var i2CDevice = provider.GetRequiredKeyedService<I2cDevice>(nameof(Ssd1306Size128X64));
+            //    return new Ssd1306Size128X64(i2CDevice);
+            //});
         }
         else
         {

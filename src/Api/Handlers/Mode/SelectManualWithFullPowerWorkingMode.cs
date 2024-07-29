@@ -1,10 +1,5 @@
-﻿using System.Drawing;
-using Api.Domain.WorkingModes;
+﻿using Api.Domain.WorkingModes;
 using Api.Hardware.Displays;
-using Iot.Device.Display;
-using Iot.Device.Graphics.SkiaSharpAdapter;
-using Iot.Device.Max7219;
-using SkiaSharp;
 
 namespace Api.Handlers.Mode;
 
@@ -23,11 +18,6 @@ public class SelectManualWithFullPowerWorkingModeRequestHandler(
         if (!successful) return false;
 
         await currentWorkingModeSelector.Set(selectedworkingMode.Identifier);
-
-        var screen = display.GetBackBufferCompatibleImage();
-        var drawpingApi = screen.GetDrawingApi();
-        drawpingApi.DrawText("test", "Liberation Sans", 25, Color.White, new Point(30, 30));
-        display.DrawBitmap(screen);
         return true;
     }
 }
