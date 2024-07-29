@@ -18,7 +18,7 @@ public class InitializationService(
         BitmapImage.RegisterImageFactory(new SkiaSharpImageFactory());
         display.EnableDisplay(true);
         const string font = "DejaVu Sans";
-        using (var image = BitmapImage.CreateBitmap(128, 64, PixelFormat.Unspecified)))
+        using (var image = BitmapImage.CreateBitmap(128, 64, PixelFormat.Unspecified))
         {
             image.Clear(Color.Black);
             var g = image.GetDrawingApi();
