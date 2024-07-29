@@ -27,6 +27,7 @@ public class SelectManualWithFullPowerWorkingModeRequestHandler(
         var screen = display.GetBackBufferCompatibleImage();
         var drawpingApi = screen.GetDrawingApi();
         drawpingApi.DrawText("test", "Liberation Sans", 25, Color.White, new Point(30, 30));
+        display.DrawBitmap(screen);
         return true;
     }
 }
